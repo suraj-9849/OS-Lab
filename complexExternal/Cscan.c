@@ -74,7 +74,7 @@ int main()
     else
     {
         // Left:
-        for (int i = pos; i >=0; i--)
+        for (int i = pos; i >= 0; i--)
         {
             printf("%d->",requests[i]);
             if(i!=pos){
@@ -83,15 +83,15 @@ int main()
         }
         totalSeek+=abs(199-0);
         printf("199->");
-        for(int i=n-1;i<pos;i++){
+        for(int i=n-1;i>pos;i--){
             printf("%d->",requests[i]);
             if(i!=n-1){
                 totalSeek+=abs(requests[i]-requests[i+1]);
             }else{
-                totalSeek+=abs(requests[i]-0);
+                totalSeek+=abs(requests[i]-199);
             }
         }
     }
-    printf("Total Requests are: %d\n",totalSeek);
+    printf("\nTotal Seek Distance: %d\n",totalSeek);
     return 0;
 }

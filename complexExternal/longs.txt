@@ -1,0 +1,334 @@
+Bankers:
+take process(n), resources(m)
+initalize the alloc, need, max, work, burstTime Matrix
+take the alloc, max, work Matrix from user
+need =  max- alloc
+initialize bool Finish[n] matrix with all values = False(by loop)
+ss[n], count =0;
+while(count<n){
+    bool found = false;
+    for i loop:
+    if(!Finish[i]){
+        bool canExecute = true;
+        for j in loop:
+        {    if need[i][j] > work[j]:
+            canExecute=false;
+            break;
+        }
+        if canExecute:
+        {   
+         for k in loop:
+        {work[k]+=alloc[i][k]}
+        ss[count++] = i;
+        found = true;
+        Finish[i] = true;
+        }
+    }
+    if(!found){
+        Dont have SafeState return 1;
+    }
+}
+loop:
+for i in loop:
+print ss[i]
+
+
+RR:
+take the no. of Processes(n)
+take the at[], bt[] from user
+in the loop:
+rt[i] = bt[i]
+
+initalize timeQuantum, time, flag as 0 and remain = n
+while(remain!=0){
+    flag = 0;
+    for i in loop:
+    if(rt[i]>0 && at[i]<=time)
+    {
+        flag = 1
+        if(rt[i]>=timeQuantum){
+            time+=timeQuantum;
+            rt[i]-=timeQuantum
+        }else{
+            time+=rt[i];
+            remain-=1
+            rt[i]=0
+            int turnArt = time-at[i]
+            int waitingT= turnArt -bt[i]
+            wt += waitingT
+            tat+=turnArt
+            print(i+1,waitingT,turnArt)
+        }
+    }
+    if flag==0:
+    time++;
+}
+    printf("\nAverage Waiting Time = %.2f", (float)wt / n);
+    printf("\nAverage Turnaround Time = %.2f\n", (float)tat / n);
+
+
+Segmentation:
+struct Segment{
+ int base;
+ int limit;
+ int values[MAX]
+};
+struct Segment segTable[MAX];
+ main():
+ char ch;
+ getSegInfo()
+ do{
+    translatetoLogicaladd()
+    take ch value
+ }while(ch=='Y')
+ void getSegInfo(){
+    take n, => base, limit and values
+    for i in range:
+    base, 
+    limit
+    for j in range segTable[i].limit:
+    take segTable[i].values[j]
+ }
+ translatetoLogicaladd(){
+    take segNum,offset
+    phyAdd = segTable[segNum].base + offset;
+    val = segTable[segNum].values[offset];
+    print(phyAdd, val)
+ }
+
+Priority CPU:
+take the n=> no.of Processes
+initialize pid,bt, pr
+sort based on priority: the pr and  bt and also sort the pid based on pr only
+wt[0] = 0
+tat[0] = bt[0]
+for i in range(1,n):
+wt[i] = wt[i-1]+bt[i-1]
+tat[i] = wt[i] + bt[i]
+printf("\nProcess\tPriority\tBurst Time\tWaiting Time\tTurnaround Time\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("P%d\t%d\t\t%d\t\t%d\t\t%d\n", p[i], pr[i], bt[i], wt[i], tat[i]);
+        totalwt += wt[i];
+        totaltat += tat[i];
+    }
+finally print the avg tat, wt
+
+SSTF:
+take the no. of Disks
+take the head values
+take the requests from the user of n Disks
+and also at that time only make visited[i]=0
+
+now Loop:
+for i in range:
+    {   
+     int minDis=9999999, idx = -1
+    for j in range:
+        if !visited[j]:
+        int dis = abs(requests-head)
+            if(dis<minDis){
+                minDis  = dis
+                idx = j
+            }
+    visited[idx] = 1
+    totalSeek+=abs(requests[idx]-head)
+    head = requests[idx]
+    print("head")
+    if i!=n-1 print(->)
+    }
+print (totalSeek)
+
+
+CSCAN:
+take no.of Disks
+requests[n+2]
+take the Requests
+take the head
+take the direction 0 -> left and 1 -> Right
+    if direction ==1 : 
+    requests[n++] = 199
+    else:
+    requests[n++] = 0
+requests[n++] = head
+// Now Sort all the Requests
+// Also get the pos of the head
+using the double for loop: i to n-1 and j from i+1 to n
+totalDisks = 0
+if direction ==1 : // Right
+for i in range(pos, n-1):
+totalDisks+=abs(requests[i]-requests[i-1])
+totalDisks+=abs(199-0)
+for i in range(0, pos):
+if i!=0:
+totalDisks+=abs(requests[i]-requests[i-1])
+else:
+totalDisks+=abs(requests[i]-0)
+
+
+else :// left
+for i in range(pos, 0):
+totalDisks+=abs(requests[i]-requests[i+1])
+totalDisks+=abs(199-0)
+for i in range(n-1, pos):
+if i!=n-1:
+totalDisks+=abs(requests[i]-requests[i+1])
+else:
+totalDisks+=abs(requests[i]-199)
+print(totalDisks)
+
+
+// Scan:
+take no.of Disks
+requests[n+1]
+take the Requests
+take the head
+take the direction 0 -> left and 1 -> Right
+requests[n++] = head
+// Now Sort all the Requests
+// Also get the pos of the head
+using the double for loop: i to n-1 and j from i+1 to n
+totalDisks = 0
+if direction ==1 : // Right
+for i in range(pos, n-1):
+totalDisks+=abs(requests[i]-requests[i-1])
+if (requests[n - 1] != 199)
+{
+    totalSeek += abs(199 - requests[n - 1]);
+}
+printf("199->");
+for i in range(pos-1, 0):
+if i!=pos-1:
+totalDisks+=abs(requests[i]-requests[i+1])
+else:
+totalDisks+=abs(requests[i]-199)
+
+
+else :// left
+for i in range(pos, 0):
+totalDisks+=abs(requests[i]-requests[i+1])
+if (requests[0] != 0)
+{
+    totalSeek += abs(0 - requests[0]);
+}
+printf("199->");
+for i in range(pos+1, n):
+if i!=n-1:
+totalDisks+=abs(requests[i]-requests[i-1])
+else:
+totalDisks+=abs(requests[i]-0)
+print(totalDisks)
+
+
+FCFS:
+int ans= 0, n, f, frames[f], pages[n]
+take the no.of Pages=> n
+take all the values of the Pages
+take the no.of Frames=>f
+initialize all the frames as -1 in the start
+
+for i in range n:
+flag = 0
+    for j in range f:
+    if(frames[j]==Pages[i])
+    flag=1
+    break
+if(flag==0):
+frames[pos] = Pages[i]
+pos = (pos+1)%f
+ans+=1
+for k in range:
+if(frames[i]!=-1){print(frames[k])}
+else print(-1)
+
+print("Total Frames:%d",ans)
+
+
+
+LRU:
+int findLRU(int time[],int n){
+    int min = time[0];
+    int pos=0;
+    for i in 1,n:
+    if(min>time[i]){
+        min = time[i]
+        pos = i;
+    }
+return pos
+}
+
+int ans= 0, n, f, frames[f], pages[n]
+take the no.of Pages=> n
+take all the values of the Pages
+take the no.of Frames=>f
+initialize all the frames as -1 in the start
+int cnt=0, t=0
+for i in range n:
+flag = 0
+    for j in range f:
+    if(frames[j]==Pages[i])
+    flag=1
+    time[j]=t++
+    break
+if(flag==0):
+{if cnt<f:
+time[cnt++] = t++;
+frames[cnt] = pages[i]
+else:
+int pos = findLRU(time, f)
+frames[pos] = pages[i]
+time[pos++] = t++;
+ans+=1
+}for k in range:
+if(frames[i]!=-1){print(frames[k])}
+else print(-1)
+
+print("Total Frames:%d",ans)
+
+
+Optimal:
+int predict(int process[], int frames[], int idx,int n, int f){
+    int pos = -1;
+    farthest = idx;
+    for i in range(0, f):
+    int j 
+    for j in range(idx+1, n):
+      if frames[i]==pages[j]:
+        if j>farthest:
+          farthest = j
+          pos = i
+      break;
+    if(j==n): return i
+
+return pos==-1 ? 0: pos;
+}
+
+int ans= 0, n, f, frames[f], pages[n]
+take the no.of Pages=> n
+take all the values of the Pages
+take the no.of Frames=>f
+initialize all the frames as -1 in the start
+int cnt=0, t=0
+for i in range n:
+flag = 0
+    for j in range f:
+    if(frames[j]==Pages[i])
+    flag=1
+    time[j]=t++
+    break
+if(flag==0):
+{if cnt<f:
+time[cnt++] = t++;
+frames[cnt] = pages[i]
+else:
+int pos = predict(process, frames, i+1, n, f)
+frames[pos] = pages[i]
+time[pos++] = t++;
+ans+=1
+}for k in range:
+if(frames[i]!=-1){print(frames[k])}
+else print(-1)
+
+print("Total Frames:%d",ans)
+
+

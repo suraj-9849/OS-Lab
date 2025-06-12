@@ -1,34 +1,37 @@
 #include <stdio.h>
 
-int findLRU(int time[],int n){
-    int i, min=time[0],pos = 0;
-    for(int i=1;i<n;i++){
-        if(time[i]<min){
+int findLRU(int time[], int n)
+{
+    int i, min = time[0], pos = 0;
+    for (i = 1; i < n; i++)
+    {
+        if (time[i] < min)
+        {
             min = time[i];
             pos = i;
         }
     }
+
     return pos;
 }
 
 int main()
 {
     int n;
-    printf("Enter n:");
+    printf("Enter the no.of Pages:");
     scanf("%d", &n);
-    int pages[n];
-    printf("Enter the Page references: \n");
+    int pages[n], f;
     for (int i = 0; i < n; i++)
     {
         scanf("%d", &pages[i]);
     }
-    int f;
-    printf("Enter the frames: ");
+    printf("ENter the NO.of Frames:");
     scanf("%d", &f);
-    int frames[f], time[f];
-    int count = 0, pageFaults = 0;
-    int t = 0;
+    int time[f], frames[f];
+    int count = 0;
     int pos = 0;
+    int t = 0;
+    int pageFaults = 0;
     for (int i = 0; i < f; i++)
     {
         frames[i] = -1;
@@ -46,7 +49,6 @@ int main()
                 break;
             }
         }
-
         if (flag == 0)
         {
             if (count < f)
@@ -57,27 +59,22 @@ int main()
             }
             else
             {
-                pos = findLRU(time,f);
+                pos = findLRU(time, f);
                 frames[pos] = pages[i];
-                time[pos]=t++;
+                time[pos] = t++;
             }
             pageFaults++;
-            }
+        }
         printf("Frames: ");
         for (int k = 0; k < f; k++)
         {
-            if (frames[i] != -1)
-            {
+            if (frames[k] != -1)
                 printf("%d ", frames[k]);
-            }
             else
-            {
                 printf("- ");
-            }
         }
         printf("\n");
     }
-    printf("Total no of Page Faults: %d\n", pageFaults);
-
+    printf("%d", pageFaults);
     return 0;
 }
