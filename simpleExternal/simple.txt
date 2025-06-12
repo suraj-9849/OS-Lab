@@ -1,0 +1,195 @@
+FCFS:
+take the no.of Processes: n 
+int bt[n]
+take the bt as the input from user
+wt[0] = 0
+tat[0] = bt[0]
+for i in range:
+wt[i] = wt[i-1] + bt[i-1]
+tat[i] = wt[i]+bt[i]
+print process, bt, wt,tat using the loop:
+in that loop only cal waitingT+=wt, totaltat+=tat
+print((float)turnArt/n)
+print((float)waitingT/n)
+
+SJF:
+take the no.of Processes: n 
+int bt[n]
+take the bt as the input from user
+sort based on bt and also the processIds to based on bt only
+wt[0] = 0
+tat[0] = bt[0]
+for i in range:
+wt[i] = wt[i-1] + bt[i-1]
+tat[i] = wt[i]+bt[i]
+print process, bt, wt,tat using the loop:
+in that loop only cal waitingT+=wt, totaltat+=tat
+print((float)turnArt/n)
+print((float)waitingT/n)
+
+Paging:
+take the no.of Pages=>n, take the pageTable input also from the user, pageSize, logicaladdress from user
+pageNum = logicaladdress/pageSize
+offset = logicaladdress%pageSize
+if (pageNum >= n)
+{
+printf("Invalid logical address! Page number out of range.\n");
+return 0;
+}
+int phyAdd = pageTable[pageNum]* pageSize + offset;
+print (phyAdd)
+
+Producer and Consumer:
+take the do while loop:
+1. Produce, 2. Consume, 3. Exit
+    1=> if (in+1)%s == out : Buffer is full
+    else:
+    take Produce from user only
+    b[in] = Produce
+    in = (in+1)%s
+    print(Produce)
+    2=> if(in==out): Buffer is Empty
+    else:
+    Consume=b[out]
+    print(Consume)
+    3=> return 1
+
+FirstFit:
+take the nb which is no.of blocks and np=> no.of process
+int blocks[nb] and( process[np], allocation[np]=-1) are given by the user
+for i in range(np):
+ for j in range(nb):
+ if(blocks[j]>=process[i]){
+    allocation[i]=j;
+    blocks[j] -=process[i]
+    break;
+ }
+print(processes, allocation, blocksize, processSize)
+
+
+BestFit:
+take the nb which is no.of blocks and np=> no.of process
+int blocks[nb] and( process[np], allocation[np]=-1) are given by the user
+
+for i in range(np):
+int bestIdx= -1;
+ for j in range(nb):
+ if(blocks[j]>=process[i]){
+    if(bestIdx=-1 || blocks[j] < blocks[bestIdx]){
+        bestIdx = j
+    }
+ }
+
+if (bestIdx != -1)
+{
+   allocation[i] = bestIdx;
+   blocks[bestIdx] -= process[i];
+}
+print(processes, allocation, blocksize, processSize)
+
+
+WorstFit:
+take the nb which is no.of blocks and np=> no.of process
+int blocks[nb] and( process[np], allocation[np]=-1) are given by the user
+
+for i in range(np):
+int maxIdx= -1;
+ for j in range(nb):
+ if(blocks[j]>=process[i]){
+    if(maxIdx=-1 || blocks[j] > blocks[maxIdx]){
+        maxIdx = j
+    }
+ }
+if (maxIdx != -1)
+{
+   allocation[i] = maxIdx;
+   blocks[maxIdx] -= process[i];
+}
+
+print(processes, allocation, blocksize, processSize)
+
+
+Sequential:
+let memory[50] = {0}
+take the n:
+loop throught n:
+take the start and length;
+flag=0
+for i in range(len(start,start+length)):
+if(memory[i]==1):
+flag=1
+break;
+
+if(flag==0):
+for i in range(len(start, start+length)): memory[i] = 1
+print("Files are allocated Successfully!")
+else:
+print("already allocated!")
+
+
+
+Linked:
+let memory[50] = {0}, linked[50]
+loop throught n:
+take the start
+if (memory[start])
+    continue;
+memory[start] = 1;
+prev = start;
+take the no.of blocks
+for j in range(blockSize):
+  if(memory[j]): print("already exists"); break;
+  else:
+  memory[j] = 1;
+  linked[prev]= j;
+  prev = j;
+
+linked[prev] = -1;
+for i=start, i!=-1, i=linked[i]
+   print(->i)
+
+
+Indexed:
+#include <stdio.h>
+
+int main() {
+    int n, i, j, index, blocks, b;
+    int allocated[50] = {0}, file[50];
+
+    printf("Enter number of files: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("\nEnter index block: ");
+        scanf("%d", &index);
+
+        if (allocated[index]) {
+            printf("Index block already allocated. Skipping file.\n");
+            continue;
+        }
+
+        printf("Enter number of blocks: ");
+        scanf("%d", &blocks);
+
+        printf("Enter %d block numbers: ", blocks);
+        int ok = 1;
+        for (j = 0; j < blocks; j++) {
+            scanf("%d", &file[j]);
+            if (allocated[file[j]]) ok = 0;
+        }
+
+        if (!ok) {
+            printf("One or more blocks already allocated. Skipping file.\n");
+            continue;
+        }
+
+        allocated[index] = 1;
+        for (j = 0; j < blocks; j++) allocated[file[j]] = 1;
+
+        printf("File %d stored at index %d with blocks: ", i + 1, index);
+        for (j = 0; j < blocks; j++) printf("%d ", file[j]);
+        printf("\n");
+    }
+
+    return 0;
+}
